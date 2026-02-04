@@ -15,6 +15,7 @@
   <component name="PhpCSFixer">
     <phpcsfixer_settings>
       <PhpCSFixerConfiguration tool_path="$PROJECT_DIR$/vendor/bin/php-cs-fixer" />
+      <phpcs_fixer_by_interpreter asDefaultInterpreter="true" interpreter_id="e3d9ffbc-91d6-480f-8985-c18cb543f1cd" tool_path="C:/Users/mehdi/OneDrive/Documents/BUT 3/maintenance_project/maintenance_project/vendor/bin/php-cs-fixer" timeout="30000" />
     </phpcsfixer_settings>
   </component>
   <component name="PhpIncludePathManager">
