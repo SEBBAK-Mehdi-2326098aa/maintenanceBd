@@ -15,6 +15,7 @@ RUN docker-php-ext-configure intl \
     && docker-php-ext-install -j$(nproc) \
     intl \
     pdo \
+    pdo_mysql \
     pdo_pgsql \
     opcache \
     zip

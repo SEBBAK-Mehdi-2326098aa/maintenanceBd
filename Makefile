@@ -1,17 +1,18 @@
-.PHONY: help build up down logs shell composer test lint migrate
+.PHONY: help build up down logs shell composer test lint migrate cache rebuild
 
 help:
 	@echo "Commandes disponibles:"
 	@echo "  make build     - Construire les images Docker"
-	@echo "  make up        - Démarrer les containers"
-	@echo "  make down      - Arrêter les containers"
+	@echo "  make up        - Demarrer les containers"
+	@echo "  make down      - Arreter les containers"
 	@echo "  make logs      - Voir les logs"
 	@echo "  make shell     - Ouvrir un shell dans le container PHP"
-	@echo "  make composer  - Exécuter composer install"
-	@echo "  make test      - Exécuter les tests"
-	@echo "  make lint      - Exécuter le linter"
-	@echo "  make migrate   - Exécuter les migrations"
+	@echo "  make composer  - Executer composer install"
+	@echo "  make test      - Executer les tests"
+	@echo "  make lint      - Executer le linter"
+	@echo "  make migrate   - Executer les migrations (sur la BD distante)"
 	@echo "  make cache     - Vider le cache"
+	@echo "  make rebuild   - Reconstruire completement"
 
 build:
 	docker-compose build
@@ -29,25 +30,22 @@ logs:
 	docker-compose logs -f
 
 shell:
-	docker-compose exec php bash
+	docker exec -it symfony_app bash
 
 composer:
-	docker-compose exec php composer install
+	docker exec -it symfony_app composer install
 
 test:
-	docker-compose exec php composer test
+	docker exec -it symfony_app composer test
 
 lint:
-	docker-compose exec php composer lint
+	docker exec -it symfony_app composer lint
 
 migrate:
-	docker-compose exec php php bin/console doctrine:migrations:migrate --no-interaction
-
-db-create:
-	docker-compose exec php php bin/console doctrine:database:create --if-not-exists
+	docker exec -it symfony_app php bin/console doctrine:migrations:migrate --no-interaction
 
 cache:
-	docker-compose exec php php bin/console cache:clear
+	docker exec -it symfony_app php bin/console cache:clear
 
 rebuild:
 	docker-compose down -v

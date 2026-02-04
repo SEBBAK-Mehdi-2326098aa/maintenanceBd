@@ -17,8 +17,7 @@ function Show-Help {
     Write-Host "  .\make.ps1 composer  - Executer composer install"
     Write-Host "  .\make.ps1 test      - Executer les tests"
     Write-Host "  .\make.ps1 lint      - Executer le linter"
-    Write-Host "  .\make.ps1 migrate   - Executer les migrations"
-    Write-Host "  .\make.ps1 db-create - Creer la base de donnees"
+    Write-Host "  .\make.ps1 migrate   - Executer les migrations (sur la BD distante)"
     Write-Host "  .\make.ps1 cache     - Vider le cache"
     Write-Host "  .\make.ps1 rebuild   - Reconstruire completement"
 }
@@ -66,10 +65,6 @@ switch ($Command.ToLower()) {
     "migrate" {
         Write-Host "Execution des migrations..." -ForegroundColor Green
         docker exec -it symfony_app php bin/console doctrine:migrations:migrate --no-interaction
-    }
-    "db-create" {
-        Write-Host "Creation de la base de donnees..." -ForegroundColor Green
-        docker exec -it symfony_app php bin/console doctrine:database:create --if-not-exists
     }
     "cache" {
         Write-Host "Vidage du cache..." -ForegroundColor Green

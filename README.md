@@ -32,6 +32,20 @@ L'application est accessible à l'adresse : [http://localhost:8000](http://local
 
 ## Commandes Docker utiles
 
+### Avec PowerShell (Windows)
+
+```powershell
+.\make.ps1 build     # Construire les images
+.\make.ps1 up        # Démarrer les containers
+.\make.ps1 down      # Arrêter les containers
+.\make.ps1 logs      # Voir les logs
+.\make.ps1 shell     # Ouvrir un shell dans le container PHP
+.\make.ps1 test      # Exécuter les tests
+.\make.ps1 lint      # Exécuter le linter
+.\make.ps1 migrate   # Exécuter les migrations
+.\make.ps1 cache     # Vider le cache
+```
+
 ### Avec Makefile (Linux/Mac)
 
 ```bash
@@ -46,12 +60,9 @@ make migrate   # Exécuter les migrations
 make cache     # Vider le cache
 ```
 
-### Sans Makefile (Windows/PowerShell)
+### Commandes Docker directes
 
-```powershell
-# Construire les images
-docker-compose build
-
+```bash
 # Démarrer les containers
 docker-compose up -d
 
@@ -61,23 +72,14 @@ docker-compose down
 # Voir les logs
 docker-compose logs -f
 
-# Ouvrir un shell dans le container PHP
-docker-compose exec php bash
+# Ouvrir un shell
+docker exec -it symfony_app bash
 
-# Installer les dépendances
-docker-compose exec php composer install
-
-# Exécuter les tests
-docker-compose exec php composer test
-
-# Exécuter le linter
-docker-compose exec php composer lint
-
-# Migrations de base de données
-docker-compose exec php php bin/console doctrine:migrations:migrate
-
-# Vider le cache
-docker-compose exec php php bin/console cache:clear
+# Exécuter une commande
+docker exec -it symfony_app composer install
+docker exec -it symfony_app composer test
+docker exec -it symfony_app composer lint
+docker exec -it symfony_app php bin/console doctrine:migrations:migrate
 ```
 
 ## Configuration
@@ -87,24 +89,31 @@ docker-compose exec php php bin/console cache:clear
 Les variables d'environnement sont configurées dans les fichiers suivants :
 
 - `.env` - Configuration par défaut
-- `.env.local` - Surcharges locales (non versionné)
-- `.env.docker` - Configuration spécifique Docker
+- `.env.local` - Surcharges locales (non versionné, à créer)
 
 ### Base de données
 
-Le projet utilise PostgreSQL 16. La configuration Docker crée automatiquement :
+Le projet utilise une **base de données distante** (par exemple sur Alwaysdata).
 
-- **Host**: `database` (dans le réseau Docker) ou `localhost` (depuis l'hôte)
-- **Port**: `5432`
-- **Database**: `app`
-- **User**: `app`
-- **Password**: `password`
+**Configuration :**
+
+Édite le fichier `.env` et remplace la ligne `DATABASE_URL` avec tes identifiants :
+
+```dotenv
+# Pour MySQL (Alwaysdata)
+DATABASE_URL="mysql://username:password@mysql-username.alwaysdata.net:3306/username_dbname?serverVersion=8.0&charset=utf8mb4"
+
+# Pour PostgreSQL
+DATABASE_URL="postgresql://username:password@postgresql-username.alwaysdata.net:5432/username_dbname?serverVersion=15&charset=utf8"
+```
+
+**Note :** N'oublie pas de créer la base de données sur ton serveur distant avant de lancer les migrations.
 
 ## Stack technique
 
 - **PHP**: 8.4
 - **Symfony**: 8.0
-- **Base de données**: PostgreSQL 16
+- **Base de données**: MySQL/PostgreSQL (distante - ex: Alwaysdata)
 - **ORM**: Doctrine
 - **Tests**: PHPUnit 12.5
 - **Linter**: PHP-CS-Fixer 3.93
