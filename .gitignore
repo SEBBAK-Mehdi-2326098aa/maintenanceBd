@@ -9,6 +9,11 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
+###> docker ###
+# Docker volumes data (if stored locally)
+docker-data/
+###< docker ###
+
 ###> phpunit/phpunit ###
 /phpunit.xml
 /.phpunit.cache/

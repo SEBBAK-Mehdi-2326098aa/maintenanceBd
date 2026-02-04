@@ -1,0 +1,42 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Symfony
+var/cache/*
+var/log/*
+var/share/*
+!var/cache/.gitkeep
+!var/log/.gitkeep
+
+# Vendor (will be installed in container)
+vendor/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment files with local overrides
+.env.local
+.env.*.local
+
+# PHPUnit
+.phpunit.result.cache
+phpunit.xml
+
+# PHP CS Fixer
+.php-cs-fixer.cache
+
+# PHPStan
+phpstan.neon

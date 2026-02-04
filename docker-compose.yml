@@ -1,0 +1,56 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: symfony_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - vendor_data:/app/vendor
+      - var_data:/app/var
+    environment:
+      - APP_ENV=dev
+      - APP_SECRET=docker_dev_secret_change_in_prod
+      - DATABASE_URL=postgresql://app:password@database:5432/app?serverVersion=16&charset=utf8
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - symfony_network
+    user: "1000:1000"
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - |
+        composer install --no-interaction
+        php bin/console cache:clear
+        symfony serve --no-tls --port=8000 --allow-http
+
+  database:
+    image: postgres:16-alpine
+    container_name: symfony_db
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: app
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d app"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - symfony_network
+
+volumes:
+  postgres_data:
+  vendor_data:
+  var_data:
+
+networks:
+  symfony_network:
+    driver: bridge
