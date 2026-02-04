@@ -1,8 +1,13 @@
 parameters:
-    level: 4
+    level: 6
     paths:
         - bin/
         - config/
         - public/
         - src/
         - tests/
+    excludePaths:
+        - var/**
+        - vendor/**
+        - **/Proxy/**
+        - src/Entity/**
