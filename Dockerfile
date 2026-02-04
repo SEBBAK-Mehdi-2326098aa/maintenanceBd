@@ -27,13 +27,16 @@ RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | b
 RUN echo "memory_limit=256M" > /usr/local/etc/php/conf.d/memory-limit.ini \
     && echo "date.timezone=Europe/Paris" > /usr/local/etc/php/conf.d/timezone.ini
 
+# Configure Git pour éviter les erreurs de safe.directory
+RUN git config --global --add safe.directory /app \
+    && git config --global --add safe.directory '*'
+
 WORKDIR /app
 
-RUN useradd -m -u 1000 symfony \
-    && chown -R symfony:symfony /app
+# Créer les répertoires vendor et var avec les bonnes permissions
+RUN mkdir -p /app/vendor /app/var \
+    && chmod -R 777 /app
 
 EXPOSE 8000
-
-USER symfony
 
 CMD ["symfony", "serve", "--no-tls", "--port=8000", "--allow-http"]

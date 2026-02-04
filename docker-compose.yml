@@ -8,21 +8,20 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
-      - vendor_data:/app/vendor
-      - var_data:/app/var
     environment:
       - APP_ENV=dev
       - APP_SECRET=docker_dev_secret_change_in_prod
       - DATABASE_URL=postgresql://app:password@database:5432/app?serverVersion=16&charset=utf8
+      - COMPOSER_ALLOW_SUPERUSER=1
     depends_on:
       database:
         condition: service_healthy
     networks:
       - symfony_network
-    user: "1000:1000"
     entrypoint: ["/bin/bash", "-c"]
     command:
       - |
+        git config --global --add safe.directory /app
         composer install --no-interaction
         php bin/console cache:clear
         symfony serve --no-tls --port=8000 --allow-http
@@ -48,8 +47,6 @@ services:
 
 volumes:
   postgres_data:
-  vendor_data:
-  var_data:
 
 networks:
   symfony_network:
