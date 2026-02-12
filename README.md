@@ -78,10 +78,13 @@ docker-compose logs -f
 docker exec -it symfony_app bash
 
 # Exécuter une commande
-docker exec -it symfony_app composer install
+docker exec -it symfony_app composer update
 docker exec -it symfony_app composer test
 docker exec -it symfony_app composer lint
 docker exec -it symfony_app php bin/console doctrine:migrations:migrate
+
+# Ensuite vous pouvez vous rendre sur la page d'acceuil en accédant à l'url 
+localhost:8000/home
 ```
 
 ## Configuration
