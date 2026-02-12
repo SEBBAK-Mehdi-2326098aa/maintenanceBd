@@ -1,7 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Accueil - Gestion des championnats{% endblock %}
 
 {% block body %}
-    <h1>Hello</h1>
+    <h1>Bienvenue sur la plateforme de gestion des championnats</h1>
+
+    <p>Cette application vous permet de gérer vos championnats, compétitions et épreuves sportives.</p>
+
+    <h2>Navigation rapide</h2>
+    <ul>
+        <li><a href="{{ path('app_sport_index') }}">⚽ Gérer les sports</a></li>
+        <li><a href="{{ path('app_championnat_index') }}">📋 Voir tous les championnats</a></li>
+        <li><a href="{{ path('app_championnat_new') }}">➕ Créer un nouveau championnat</a></li>
+    </ul>
+
+    <h2>Structure de l'application</h2>
+    <ul>
+        <li><strong>Sport</strong> : Type de sport (ex: Football, Basketball)</li>
+        <li><strong>Championnat</strong> : Un ensemble de compétitions liées à un sport</li>
+        <li><strong>Compétition</strong> : Un tournoi ou une ligue au sein d'un championnat</li>
+        <li><strong>Épreuve</strong> : Une discipline au sein d'une compétition (individuelle, en équipe ou mixte)</li>
+    </ul>
 {% endblock %}

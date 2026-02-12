@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sport : {{ sport.name }}{% endblock %}
+
+{% block body %}
+    <div class="breadcrumb">
+        <a href="{{ path('app_home') }}">Accueil</a> &gt;
+        <a href="{{ path('app_sport_index') }}">Sports</a> &gt;
+        <span>{{ sport.name }}</span>
+    </div>
+
+    <h1>{{ sport.name }}</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-error">{{ message }}</div>
+    {% endfor %}
+
+    <h2>Championnats associés ({{ sport.championnats|length }})</h2>
+
+    {% if sport.championnats is empty %}
+        <p>Aucun championnat n'utilise ce sport.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom du championnat</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for championnat in sport.championnats %}
+                    <tr>
+                        <td>{{ championnat.nom }}</td>
+                        <td>
+                            <a href="{{ path('app_championnat_show', {'id': championnat.id}) }}">👁️ Voir</a> |
+                            <a href="{{ path('app_competition_index', {'championnatId': championnat.id}) }}">🏅 Compétitions</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <h2>Actions</h2>
+    <p>
+        {% if sport.championnats is empty %}
+            <form method="post" action="{{ path('app_sport_delete', {'id': sport.id}) }}" style="display: inline;">
+                <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce sport ?')"
+                        style="background-color: #dc3545;">
+                    🗑️ Supprimer ce sport
+                </button>
+            </form>
+        {% else %}
+            <span style="color: #6c757d;">
+                ℹ️ Ce sport ne peut pas être supprimé car il est utilisé par {{ sport.championnats|length }} championnat(s).
+            </span>
+        {% endif %}
+    </p>
+
+    <p><a href="{{ path('app_sport_index') }}">⬅️ Retour à la liste des sports</a></p>
+{% endblock %}
+

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compétitions du championnat {{ championnat.nom }}{% endblock %}
+
+{% block body %}
+    <h1>Compétitions du championnat : {{ championnat.nom }}</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    <p>
+        <a href="{{ path('app_competition_new', {'championnatId': championnat.id}) }}">Créer une nouvelle compétition</a>
+    </p>
+
+    {% if competitions is empty %}
+        <p>Aucune compétition trouvée pour ce championnat.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for competition in competitions %}
+                    <tr>
+                        <td>{{ competition.nom }}</td>
+                        <td>
+                            <a href="{{ path('app_competition_show', {'id': competition.id}) }}">Voir</a>
+                            <a href="{{ path('app_epreuve_index', {'competitionId': competition.id}) }}">Épreuves</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <p>
+        <a href="{{ path('app_championnat_show', {'id': championnat.id}) }}">⬅️ Retour au championnat</a> |
+        <a href="{{ path('app_championnat_index') }}">📋 Tous les championnats</a>
+    </p>
+{% endblock %}
+

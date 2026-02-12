@@ -1,3 +1,5 @@
+Ce fichier a été écrit avec l'IA pour des raisons de temps et de simplicité!
+
 # Maintenance Project
 
 Projet Symfony 8.0 avec PHP 8.4

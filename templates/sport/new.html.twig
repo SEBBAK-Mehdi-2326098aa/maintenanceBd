@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un sport{% endblock %}
+
+{% block body %}
+    <div class="breadcrumb">
+        <a href="{{ path('app_home') }}">Accueil</a> &gt;
+        <a href="{{ path('app_sport_index') }}">Sports</a> &gt;
+        <span>Nouveau</span>
+    </div>
+
+    <h1>Créer un nouveau sport</h1>
+
+    <form method="post">
+        <div>
+            <label for="name">Nom du sport :</label>
+            <input type="text" id="name" name="name" required placeholder="Ex: Football, Basketball, Tennis...">
+        </div>
+
+        <button type="submit">✅ Créer le sport</button>
+    </form>
+
+    <p><a href="{{ path('app_sport_index') }}">⬅️ Retour à la liste des sports</a></p>
+{% endblock %}
+

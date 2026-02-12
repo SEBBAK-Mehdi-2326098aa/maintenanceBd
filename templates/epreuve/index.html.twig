@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Épreuves de la compétition {{ competition.nom }}{% endblock %}
+
+{% block body %}
+    <h1>Épreuves de la compétition : {{ competition.nom }}</h1>
+    <p>Championnat : {{ competition.championnat.nom }}</p>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    <p>
+        <a href="{{ path('app_epreuve_new', {'competitionId': competition.id}) }}">Créer une nouvelle épreuve</a>
+    </p>
+
+    {% if epreuves is empty %}
+        <p>Aucune épreuve trouvée pour cette compétition.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for epreuve in epreuves %}
+                    <tr>
+                        <td>{{ epreuve.nom }}</td>
+                        <td>{{ epreuve.type }}</td>
+                        <td>
+                            <a href="{{ path('app_epreuve_show', {'id': epreuve.id}) }}">Voir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <p>
+        <a href="{{ path('app_competition_show', {'id': competition.id}) }}">⬅️ Retour à la compétition</a> |
+        <a href="{{ path('app_competition_index', {'championnatId': competition.championnat.id}) }}">🏅 Toutes les compétitions</a> |
+        <a href="{{ path('app_championnat_show', {'id': competition.championnat.id}) }}">🏆 Voir le championnat</a>
+    </p>
+{% endblock %}
+

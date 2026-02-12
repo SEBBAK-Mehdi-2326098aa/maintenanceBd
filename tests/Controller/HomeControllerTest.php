@@ -19,6 +19,6 @@ class HomeControllerTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/home');
 
-        $this->assertSelectorTextContains('h1', 'Hello');
+        $this->assertSelectorTextContains('h1', 'Bienvenue');
     }
 }
