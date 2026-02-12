@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un championnat{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouveau championnat</h1>
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+
+    <form method="post">
+        <div>
+            <label for="nom">Nom du championnat :</label>
+            <input type="text" id="nom" name="nom" required>
+        </div>
+
+        <div>
+            <label for="sport">Sport :</label>
+            <select id="sport" name="sport" required>
+                <option value="">-- Sélectionnez un sport --</option>
+                {% for sport in sports %}
+                    <option value="{{ sport.id }}">{{ sport.name }}</option>
+                {% endfor %}
+            </select>
+            <p style="margin-top: 5px;">
+                <small>
+                    <a href="{{ path('app_sport_new') }}" target="_blank">➕ Créer un nouveau sport</a>
+                </small>
+            </p>
+        </div>
+
+        <button type="submit">✅ Créer le championnat</button>
+    </form>
+
+    <p><a href="{{ path('app_championnat_index') }}">⬅️ Retour à la liste des championnats</a></p>
+{% endblock %}
+

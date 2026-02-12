@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une épreuve{% endblock %}
+
+{% block body %}
+    <h1>Créer une nouvelle épreuve</h1>
+    <p>Pour la compétition : <strong>{{ competition.nom }}</strong></p>
+
+    <form method="post">
+        <div>
+            <label for="nom">Nom de l'épreuve :</label>
+            <input type="text" id="nom" name="nom" required>
+        </div>
+
+        <div>
+            <label for="type">Type d'épreuve :</label>
+            <select id="type" name="type" required>
+                <option value="">-- Sélectionnez un type --</option>
+                {% for label, value in types %}
+                    <option value="{{ value }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit">✅ Créer l'épreuve</button>
+    </form>
+
+    <p><a href="{{ path('app_epreuve_index', {'competitionId': competition.id}) }}">⬅️ Retour à la liste des épreuves</a></p>
+{% endblock %}
+

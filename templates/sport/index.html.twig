@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des sports{% endblock %}
+
+{% block body %}
+    <div class="breadcrumb">
+        <a href="{{ path('app_home') }}">Accueil</a> &gt; <span>Sports</span>
+    </div>
+
+    <h1>Liste des sports</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-error">{{ message }}</div>
+    {% endfor %}
+
+    <p>
+        <a href="{{ path('app_sport_new') }}" class="btn">➕ Créer un nouveau sport</a>
+    </p>
+
+    {% if sports is empty %}
+        <p>Aucun sport trouvé.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Championnats</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sport in sports %}
+                    <tr>
+                        <td>{{ sport.name }}</td>
+                        <td>{{ sport.championnats|length }}</td>
+                        <td>
+                            <a href="{{ path('app_sport_show', {'id': sport.id}) }}">👁️ Voir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
+

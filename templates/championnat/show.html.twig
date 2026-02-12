@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Championnat : {{ championnat.nom }}{% endblock %}
+
+{% block body %}
+    <div class="breadcrumb">
+        <a href="{{ path('app_home') }}">Accueil</a> &gt;
+        <a href="{{ path('app_championnat_index') }}">Championnats</a> &gt;
+        <span>{{ championnat.nom }}</span>
+    </div>
+
+    <h1>{{ championnat.nom }}</h1>
+
+    <p><strong>Sport :</strong> {{ championnat.sport.name }}</p>
+
+    <h2>Compétitions ({{ championnat.competitions|length }})</h2>
+    <p>
+        <a href="{{ path('app_competition_index', {'championnatId': championnat.id}) }}" class="btn">🏅 Voir les compétitions</a>
+        <a href="{{ path('app_competition_new', {'championnatId': championnat.id}) }}" class="btn">➕ Créer une compétition</a>
+    </p>
+
+    <p><a href="{{ path('app_championnat_index') }}">⬅️ Retour à la liste des championnats</a></p>
+{% endblock %}
+

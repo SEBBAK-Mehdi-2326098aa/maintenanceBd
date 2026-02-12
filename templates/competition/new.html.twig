@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une compétition{% endblock %}
+
+{% block body %}
+    <h1>Créer une nouvelle compétition</h1>
+    <p>Pour le championnat : <strong>{{ championnat.nom }}</strong></p>
+
+    <form method="post">
+        <div>
+            <label for="nom">Nom de la compétition :</label>
+            <input type="text" id="nom" name="nom" required>
+        </div>
+
+        <button type="submit">✅ Créer la compétition</button>
+    </form>
+
+    <p><a href="{{ path('app_competition_index', {'championnatId': championnat.id}) }}">⬅️ Retour à la liste des compétitions</a></p>
+{% endblock %}
+

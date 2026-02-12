@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des championnats{% endblock %}
+
+{% block body %}
+    <div class="breadcrumb">
+        <a href="{{ path('app_home') }}">Accueil</a> &gt; <span>Championnats</span>
+    </div>
+
+    <h1>Liste des championnats</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    <p>
+        <a href="{{ path('app_championnat_new') }}" class="btn">➕ Créer un nouveau championnat</a>
+    </p>
+
+    {% if championnats is empty %}
+        <p>Aucun championnat trouvé.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Sport</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for championnat in championnats %}
+                    <tr>
+                        <td>{{ championnat.nom }}</td>
+                        <td>{{ championnat.sport.name }}</td>
+                        <td>
+                            <a href="{{ path('app_championnat_show', {'id': championnat.id}) }}">👁️ Voir</a> |
+                            <a href="{{ path('app_competition_index', {'championnatId': championnat.id}) }}">🏅 Compétitions ({{ championnat.competitions|length }})</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

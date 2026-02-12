@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compétition : {{ competition.nom }}{% endblock %}
+
+{% block body %}
+    <div class="breadcrumb">
+        <a href="{{ path('app_home') }}">Accueil</a> &gt;
+        <a href="{{ path('app_championnat_index') }}">Championnats</a> &gt;
+        <a href="{{ path('app_championnat_show', {'id': competition.championnat.id}) }}">{{ competition.championnat.nom }}</a> &gt;
+        <a href="{{ path('app_competition_index', {'championnatId': competition.championnat.id}) }}">Compétitions</a> &gt;
+        <span>{{ competition.nom }}</span>
+    </div>
+
+    <h1>{{ competition.nom }}</h1>
+
+    <p><strong>Championnat :</strong> <a href="{{ path('app_championnat_show', {'id': competition.championnat.id}) }}">{{ competition.championnat.nom }}</a></p>
+    <p><strong>Sport :</strong> {{ competition.championnat.sport.name }}</p>
+
+    <h2>Épreuves ({{ competition.epreuves|length }})</h2>
+    <p>
+        <a href="{{ path('app_epreuve_index', {'competitionId': competition.id}) }}" class="btn">🎯 Voir les épreuves</a>
+        <a href="{{ path('app_epreuve_new', {'competitionId': competition.id}) }}" class="btn">➕ Créer une épreuve</a>
+    </p>
+
+    <p>
+        <a href="{{ path('app_competition_index', {'championnatId': competition.championnat.id}) }}">⬅️ Retour à la liste des compétitions</a> |
+        <a href="{{ path('app_championnat_show', {'id': competition.championnat.id}) }}">🏆 Voir le championnat</a>
+    </p>
+{% endblock %}
+
