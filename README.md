@@ -151,3 +151,51 @@ composer lint:fix    # Corriger le style du code
 composer phpstan     # Analyse statique
 composer ci          # Lint + Tests (pour CI/CD)
 ```
+
+## Choix des technologies
+
+### Symfony 8.0
+
+**Pourquoi Symfony ?**
+
+- **Framework mature et robuste** : Symfony est un framework PHP de référence depuis plus de 15 ans, utilisé par de nombreuses entreprises (BlaBlaCar, Spotify, Dailymotion).
+- **Architecture MVC bien structurée** : Séparation claire entre la logique métier, la présentation et les données, facilitant la maintenance et l'évolution du code.
+- **Doctrine ORM intégré** : Gestion élégante de la base de données avec un ORM puissant, permettant de travailler avec des objets PHP plutôt que du SQL brut.
+- **Écosystème riche** : Nombreux bundles disponibles pour étendre les fonctionnalités (API Platform, EasyAdmin, FOSUserBundle, etc.).
+- **Documentation exhaustive** : Documentation officielle très complète et communauté active.
+- **Outils de développement** : Profiler web, barre de debug, générateur de code (Maker Bundle), facilitant le développement et le débogage.
+- **Sécurité** : Système de sécurité robuste intégré (authentification, autorisation, CSRF, XSS).
+- **Tests** : Support natif de PHPUnit et facilité pour écrire des tests unitaires et fonctionnels.
+
+**Version 8.0** : Dernière version majeure avec les améliorations de performance et les nouvelles fonctionnalités PHP 8.4.
+
+### Twig
+
+**Pourquoi Twig ?**
+
+- **Moteur de template par défaut de Symfony** : Intégration native et optimale avec le framework.
+- **Syntaxe claire et lisible** : Séparation nette entre la logique PHP et la présentation HTML, rendant les templates faciles à lire et à maintenir.
+- **Sécurité** : Échappement automatique des variables pour prévenir les failles XSS.
+- **Héritage de templates** : Système de blocs permettant de créer des layouts réutilisables et d'éviter la duplication de code.
+- **Filtres et fonctions** : Large gamme de filtres (date, upper, lower, etc.) et de fonctions pour manipuler les données directement dans les templates.
+- **Performance** : Templates compilés en PHP pur pour des performances optimales.
+- **Extensibilité** : Possibilité de créer des extensions personnalisées pour ajouter des fonctionnalités spécifiques.
+- **Séparation des responsabilités** : Les designers peuvent travailler sur les templates sans connaître PHP en profondeur.
+
+### PHP 8.4
+
+**Pourquoi PHP 8.4 ?**
+
+- **Performances** : Améliorations continues des performances à chaque version (JIT compiler depuis PHP 8.0).
+- **Typage fort** : Types natifs (typed properties, union types, mixed type) pour un code plus robuste.
+- **Syntaxe moderne** : Nouvelles fonctionnalités comme les attributs, match expression, promoted properties.
+- **Écosystème mature** : Composer, PHPUnit, PHPStan, et de nombreux outils de qualité.
+
+### Docker
+
+**Pourquoi Docker ?**
+
+- **Environnement reproductible** : Tous les développeurs travaillent avec exactement la même configuration.
+- **Isolation** : Pas de conflit avec d'autres projets ou versions installées sur la machine.
+- **Facilité de déploiement** : Même environnement en développement, test et production.
+- **Portabilité** : Fonctionne sur Windows, Mac et Linux de manière identique.
