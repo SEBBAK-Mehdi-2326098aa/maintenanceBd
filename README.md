@@ -5,7 +5,6 @@ Ce fichier a été écrit avec l'IA pour des raisons de temps et de simplicité!
 Projet Symfony 8.0 avec PHP 8.4
 
 ## Prérequis
-
 - [Docker](https://www.docker.com/get-started) et Docker Compose
 - Ou PHP 8.4+ et Composer (pour une installation sans Docker)
 
