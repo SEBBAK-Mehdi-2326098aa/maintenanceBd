@@ -1,3 +1,5 @@
+Ce fichier a été écrit avec l'IA pour des raisons de temps et de simplicité!
+
 # Documentation Docker
 
 Guide complet pour utiliser Docker avec ce projet Symfony 8.0.
