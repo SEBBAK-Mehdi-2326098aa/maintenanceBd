@@ -21,7 +21,7 @@ services:
         git config --global --add safe.directory /app
         composer install --no-interaction
         php bin/console cache:clear
-        symfony serve --no-tls --port=8000 --allow-http
+        symfony serve --no-tls --port=8000 --allow-http --allow-all-ip
 
 networks:
   symfony_network:

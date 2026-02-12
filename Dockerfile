@@ -40,4 +40,4 @@ RUN mkdir -p /app/vendor /app/var \
 
 EXPOSE 8000
 
-CMD ["symfony", "serve", "--no-tls", "--port=8000", "--allow-http"]
+CMD ["symfony", "serve", "--no-tls", "--port=8000", "--allow-http", "--allow-all-ip"]
